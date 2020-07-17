@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body,
+    html {
+      height: 100%;
+      margin: 0;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
+
+    .main {
+      display: flex;
+      flex-flow: row wrap;
+      align-items: center;
+      justify-content: center;
+      background-color: #212121;
+      width: 100%;
+      height: 100%;
+    }
+
+    .wrap {
+      display: flex;
+      flex-flow: column wrap;
+      align-items: center;
+      width: 100%;
+      text-align: center;
+    }
+
+    .talk {
+      display: inline-block;
+      background: transparent;  
+      border: 1px solid #ffffff;
+      border-radius: 50%;
+      position: relative;
+      height: 75px;
+      width: 75px;
+      cursor: pointer;
+      margin-bottom: 30px;
+      transition: all 0.5s ease-out;
+    }
+
+    .talk::before {
+      content: '';
+      background: transparent;
+      border: 1px solid #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      animation: ripple 1.5s linear 0s infinite;
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+
+    .talk:hover {
+      background-color: #fff;
+    }
+    
+    .talk:focus {
+      outline: none;
+    }
+
+    .talk:hover img {
+      filter: invert(0);
+    }
+
+    .talk.abort .talk-start {
+      opacity: 0;
+    }
+
+    .talk.abort .talk-stop {
+      opacity: 1;
+    }
+
+    @keyframes ripple {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      75% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.25);
+      }
+    }
+
+    .talk-start,
+    .talk-stop {
+      filter: invert(1);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 25px;
+      transform: translate(-50%, -50%);      
+      transition: all 0.5s ease-out;
+    }
+
+    .talk-stop {
+      width: 20px;
+      opacity: 0;
+    }
+
+    .status {
+      display: block;
+      font-family: 'Inconsolata', monospace;
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 25px;
+    }
+
+    .contentbox {
+      background: transparent;
+      border: 1px solid #fff;
+      border-top: 10px solid #fff;
+      border-radius: 5px;
+      width: 550px;
+      height: 200px;
+      text-align: left;
+      padding: 10px 20px;
+      margin-bottom: 20px;
+    }
+    
+    .content {
+      display: block;
+      font-family: 'Inconsolata', monospace;
+      font-size: 16px;
+      color: #fff;
+      line-height: 18px;
+      margin: 0;
+    }
+
+    .clear {
+      background: transparent;
+      border: 1px solid #fff;
+      border-radius: 5px;
+      height: 30px;
+      font-family: 'Inconsolata', monospace;
+      font-size: 14px;
+      color: #fff;
+      text-align: center;
+      letter-spacing: 1px;
+      line-height: 30px;
+      cursor: pointer;
+      padding: 0 20px;
+      transition: all 0.5s ease-out;
+    }
+
+    .clear:hover {
+      background: #fff;
+      color: #212121;
+    }
+
+    .clear:focus {
+      outline: none;
+    }
+
+    .clear.disabled {
+      opacity: 0.5;
+      cursor: auto;
+    }
+
+    .clear.disabled:hover {
+      background: transparent;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="main">
+    <div class="wrap">      
+      <button class="talk">
+        <img class="talk-start" src="ico_microphone.svg" alt="Microphone Icon">
+        <img class="talk-stop" src="ico_stop.svg" alt="Microphone Icon">
+      </button>
+      <span class="status"></span>
+      <div class="contentbox">
+        <p class="content"></p>
+      </div>
+      <button class="clear">Clear</button>
+    </div>
+  </section>
+
+
+  <script src="app.js"></script>
+</body>
+</html>
