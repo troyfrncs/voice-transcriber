@@ -2,7 +2,7 @@ const btn = document.querySelector('.talk');
 const content = document.querySelector ('.content');
 const status = document.querySelector ('.status');
 const btnClear = document.querySelector ('.clear');
-const statusText = `Press the button to start speech recognition.`;
+const statusText = `Press the button to start speech transcriber`;
 
 const greetings = [
   'Greeting Test 1',
